@@ -25,7 +25,7 @@ const Dashboard = () => {
   const [stollar, setStollar] = useState<Stol[]>([]);
   const [cheklar, setCheklar] = useState<any[]>([]);
   const [menyu, setMenyu] = useState<any[]>([]);
-  const [kassa, setKassa] = useState(() => {
+  const [kassa, setKassa] = useState<number|string>(() => {
     const saqlanganKassa = localStorage.getItem("kassa_puli");
     return saqlanganKassa ? Number(saqlanganKassa) : 0;
   });
@@ -179,6 +179,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    // @ts-ignore
       localStorage.setItem("kassa_puli", kassa);
     }, [kassa]);
   const tolash = (c: any) => {
