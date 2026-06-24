@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const [sports, setSports] = useState<any>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     getProduct();
@@ -29,19 +30,21 @@ export default function Home() {
             Sport<span>Book</span>
           </div>
 
-          <div className="nav-links">
+
+          <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? "✕" : "☰"}
+          </div>
+
+ 
+          <div className={`nav-links ${isOpen ? "active" : ""}`}>
             <a href="/">Venues</a>
             <a href="/">How it works</a>
             <a href="/">About</a>
-            <a href="/">Blog</a>
-            <a href="/">Contact</a>
-            {/* Admin tugmasi shu yerga qo'shildi */}
             <Link to="/admin" className="admin-btn">
               Admin
             </Link>
           </div>
         </nav>
-
         <section className="hero">
           <div className="glow left"></div>
           <div className="glow right"></div>

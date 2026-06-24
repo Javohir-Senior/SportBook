@@ -68,22 +68,33 @@
   gap: 16px;
 }
 
-.login-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-weight: 600;
+
+.hamburger {
+  display: none;
+  font-size: 24px;
   cursor: pointer;
 }
 
-.signup-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 12px;
-  font-weight: 600;
-  cursor: pointer;
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  }
+
+
+  .nav-links.active {
+    display: flex;
+  }
 }
 
 /* =========================
