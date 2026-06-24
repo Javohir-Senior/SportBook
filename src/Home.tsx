@@ -129,8 +129,8 @@ export default function Home() {
 
                 <div className="venue-bottom">
                   <div className="price">
-                    ${venue.price}
-                    <span> / hour</span>
+                    {venue.price}
+                    <span>so'm / hour</span>
                   </div>
 
                   <Link to={`/buyurtma/${venue.id}`} className="book-btn">

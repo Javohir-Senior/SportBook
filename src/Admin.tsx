@@ -121,7 +121,7 @@ const AdminPanel: React.FC = () => {
               <tr key={venue.id}>
                 <td className="font-bold">{venue.name}</td>
                 <td>{venue.location}</td>
-                <td className="text-blue-400">{venue.price}$/h</td>
+                <td className="text-blue-400">{venue.price}so'm/h</td>
                 <td className="actions">
                   <button
                     onClick={() => {
