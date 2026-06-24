@@ -35,26 +35,32 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px 20px 0 0;
   padding: 0 40px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
-  color: #fff;
+  color: white; 
+  cursor: pointer;
 }
 
 .logo span {
-  color: #2563eb;
+  color: #007bff;
 }
+
 
 .nav-links {
   display: flex;
-  gap: 40px;
+  align-items: center;
+  gap: 30px;
 }
 
 .nav-links a {
-  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 500;
   transition: 0.3s;
 }
@@ -63,37 +69,77 @@
   color: white;
 }
 
-.nav-actions {
-  display: flex;
-  gap: 16px;
+
+.admin-btn {
+  background-color: #007bff;
+  color: white !important;
+  padding: 10px 20px;
+  border-radius: 10px;
 }
 
-
+/* --- HAMBURGER TUGMASI --- */
 .hamburger {
   display: none;
-  font-size: 24px;
+  font-size: 30px;
   cursor: pointer;
+  color: white;
 }
+
 
 @media (max-width: 768px) {
   .hamburger {
-    display: block;
+    display: block !important;
+    font-size: 30px;
+    cursor: pointer;
+    color: white;
+    margin-right: 15px;
   }
 
+ 
   .nav-links {
     display: none;
-    position: absolute;
-    top: 60px;
+    flex-direction: column;
+    position: fixed;
+    top: 80px; 
     left: 0;
     width: 100%;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    height: calc(100vh - 80px);
+    background: #080f1e; 
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    z-index: 2000;
   }
 
 
   .nav-links.active {
     display: flex;
+    position: fixed;
+    top: 90px; 
+    right: 20px; 
+    left: 20px; 
+    width: auto; 
+    height: auto; 
+    background: rgba(8, 15, 30, 0.95);
+    border-radius: 20px; 
+    padding: 30px;
+    gap: 20px;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-links a {
+    font-size: 18px;
+    color: white;
+  }
+
+  .admin-btn {
+    background-color: #007bff;
+    color: white !important;
+    padding: 12px 30px;
+    border-radius: 12px;
+    text-align: center;
   }
 }
 
@@ -1240,7 +1286,10 @@
 
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(5px);
   display: flex;
@@ -1263,7 +1312,10 @@
   gap: 12px; /* Elementlar orasidagi masofa */
 }
 
-.modal-title { margin: 0 0 10px 0; text-align: center; }
+.modal-title {
+  margin: 0 0 10px 0;
+  text-align: center;
+}
 
 .modal-input {
   width: 100%;
@@ -1275,9 +1327,14 @@
   box-sizing: border-box; /* Bu juda muhim */
 }
 
-.modal-actions { display: flex; gap: 10px; margin-top: 10px; }
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-.confirm-button, .back-button {
+.confirm-button,
+.back-button {
   padding: 12px;
   border: none;
   border-radius: 8px;
@@ -1285,8 +1342,16 @@
   font-weight: bold;
 }
 
-.confirm-button { flex: 1; background: #3b82f6; color: white; }
-.back-button { flex: 1; background: #444; color: white; }
+.confirm-button {
+  flex: 1;
+  background: #3b82f6;
+  color: white;
+}
+.back-button {
+  flex: 1;
+  background: #444;
+  color: white;
+}
 
 .close-btn {
   position: absolute;
@@ -1323,25 +1388,3 @@
   margin-left: 5px;
 }
 
-
-.admin-btn {
-  background-color: #ff4757;
-  color: white !important;
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease;
-  margin-left: 10px;
-}
-
-.admin-btn:hover {
-  background-color: #ff6b81;
-}
-
-
-.nav-links a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #333; 
-}

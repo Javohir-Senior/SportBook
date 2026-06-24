@@ -30,17 +30,27 @@ export default function Home() {
             Sport<span>Book</span>
           </div>
 
-
+      
           <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? "✕" : "☰"}
           </div>
 
- 
+       
           <div className={`nav-links ${isOpen ? "active" : ""}`}>
-            <a href="/">Venues</a>
-            <a href="/">How it works</a>
-            <a href="/">About</a>
-            <Link to="/admin" className="admin-btn">
+            <a href="/" onClick={() => setIsOpen(false)}>
+              Venues
+            </a>
+            <a href="/" onClick={() => setIsOpen(false)}>
+              How it works
+            </a>
+            <a href="/" onClick={() => setIsOpen(false)}>
+              About
+            </a>
+            <Link
+              to="/admin"
+              className="admin-btn"
+              onClick={() => setIsOpen(false)}
+            >
               Admin
             </Link>
           </div>
