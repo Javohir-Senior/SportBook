@@ -1,18 +1,17 @@
-import Admin from "./Admin"
-import Dashboard from "./dashboard"
 import { Route, Routes } from "react-router-dom"
-import Stollar from "./Stollar"
-import Statistika from "./Statistika"
+import Home from "./Home"
+import Admin from "./Admin"
+import BookNow from "./BookNow"
+import AdminDashboard from "./Admin-dashboard"
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Dashboard/>} />
-        <Route path="/admin" element={<Admin/>} />
-        <Route path="/stollar" element={<Stollar/>} />
-        <Route path="/statistika" element={<Statistika/>} />
-        <Route path="/hisobot" element={<Statistika/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/admin/add-booking" element={<Admin/>} />
+        <Route path="/buyurtma/:id" element={<BookNow/>} />
+        <Route path="/admin" element={<AdminDashboard/>} />
       </Routes>
     </div>
   )
