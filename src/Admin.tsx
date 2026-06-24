@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Plus, X, Edit3, Trash2, Search, ImagePlus } from "lucide-react";
+import { Plus, Edit3, Trash2, Search, ImagePlus } from "lucide-react";
 import { db } from "../firebase.config";
 import {
   collection,
