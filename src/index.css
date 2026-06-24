@@ -1311,3 +1311,26 @@
   font-size: 12px;
   margin-left: 5px;
 }
+
+
+.admin-btn {
+  background-color: #ff4757;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  margin-left: 10px;
+}
+
+.admin-btn:hover {
+  background-color: #ff6b81;
+}
+
+
+.nav-links a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333; 
+}

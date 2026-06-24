@@ -35,6 +35,10 @@ export default function Home() {
             <a href="/">About</a>
             <a href="/">Blog</a>
             <a href="/">Contact</a>
+            {/* Admin tugmasi shu yerga qo'shildi */}
+            <Link to="/admin" className="admin-btn">
+              Admin
+            </Link>
           </div>
         </nav>
 
@@ -55,7 +59,6 @@ export default function Home() {
             </p>
           </div>
         </section>
-
 
         <div className="stats">
           <div className="stat-card">
@@ -100,7 +103,11 @@ export default function Home() {
         <div className="venues-grid">
           {sports.map((venue: any) => (
             <div key={venue.id} className="venue-card">
-              <img src={venue.images?.[0]} className="venue-image" alt={venue.name} />
+              <img
+                src={venue.images?.[0]}
+                className="venue-image"
+                alt={venue.name}
+              />
 
               <div className="venue-content">
                 <div className="venue-title">{venue.name}</div>
