@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query, orderBy, where } from "firebase/firestore";
 import { db } from "../firebase.config";
 import AdminNavbar from "./Admin-Navbar";
 import "./index.css";
-import { deleteDoc, doc } from "firebase/firestore";
 
 interface BookingType {
   id: string;
@@ -12,6 +11,8 @@ interface BookingType {
   startTime: number;
   endTime: number;
   createdAt: any;
+  userInfo?: { name: string; surname: string };
+  paymentInfo?: { amountPaid: number; cardType: string };
 }
 
 export default function AdminDashboard() {
@@ -19,31 +20,31 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const q = query(collection(db, "bookings"), orderBy("createdAt", "desc"));
+    // Bugungi sanani olish (YYYY-MM-DD formatida)
+    const todayString = new Date().toISOString().split("T")[0];
+
+    // FAQAT bugun va kelajakdagi buyurtmalarni olish uchun so'rov
+    const q = query(
+      collection(db, "bookings"),
+      where("date", ">=", todayString),
+      orderBy("date", "asc")
+    );
 
     const unsubscribe = onSnapshot(
       q,
-      async (snapshot) => {
-        const todayString = new Date().toISOString().split("T")[0];
-
+      (snapshot) => {
         const fetchedBookings = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         })) as BookingType[];
 
-        for (const booking of fetchedBookings) {
-          if (booking.date < todayString) {
-            await deleteDoc(doc(db, "bookings", booking.id));
-          }
-        }
-
-        setBookings(fetchedBookings.filter((b) => b.date >= todayString));
+        setBookings(fetchedBookings);
         setLoading(false);
       },
       (error) => {
         console.error("Firebase xatolik:", error);
         setLoading(false);
-      },
+      }
     );
 
     return () => unsubscribe();
@@ -67,9 +68,7 @@ export default function AdminDashboard() {
         {loading ? (
           <div className="admin-loading">Loading dashboard data...</div>
         ) : bookings.length === 0 ? (
-          <div className="no-data">
-            Hozircha hech qanday buyurtma mavjud emas.
-          </div>
+          <div className="no-data">Hozircha faol buyurtmalar mavjud emas.</div>
         ) : (
           <div className="table-responsive">
             <table className="admin-table">
@@ -82,66 +81,34 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {bookings.map((book: any) => (
+                {bookings.map((book) => (
                   <tr key={book.id} className="table-row">
-                    {/* Booking ID & User */}
                     <td className="doc-id">
                       <div className="flex-col">
-                        <span
-                          className="id-text"
-                          style={{ fontWeight: "bold" }}
-                        >
-                          #{book.id.slice(0, 8)}...
-                        </span>
-                        <span className="user-name" style={{ color: "#888" }}>
-                          {book.userInfo?.name || "Noma'lum"}{" "}
-                          {book.userInfo?.surname || ""}
+                        <span style={{ fontWeight: "bold" }}>#{book.id.slice(0, 8)}...</span>
+                        <span style={{ color: "#888" }}>
+                          {book.userInfo?.name || "Noma'lum"} {book.userInfo?.surname || ""}
                         </span>
                       </div>
                     </td>
-
-                    {/* Date & Time */}
                     <td className="date-time-cell">
-                      <div
-                        className="cell-content"
-                        style={{ display: "flex", flexDirection: "column" }}
-                      >
+                      <div className="cell-content" style={{ display: "flex", flexDirection: "column" }}>
                         <span>📅 {book.date}</span>
-                        <span>
-                          🕒 {book.startTime}:00 - {book.endTime}:00
-                        </span>
+                        <span>🕒 {book.startTime}:00 - {book.endTime}:00</span>
                       </div>
                     </td>
-
-                    {/* Payment Info */}
                     <td className="payment-cell">
                       <div className="flex-col">
-                        <span
-                          className="price"
-                          style={{ color: "#4caf50", fontWeight: "bold" }}
-                        >
+                        <span style={{ color: "#4caf50", fontWeight: "bold" }}>
                           {book.paymentInfo?.amountPaid || 0} sum
                         </span>
-                        <span
-                          className="card-type"
-                          style={{ fontSize: "0.75rem" }}
-                        >
+                        <span style={{ fontSize: "0.75rem" }}>
                           {book.paymentInfo?.cardType || "N/A"}
                         </span>
                       </div>
                     </td>
-
-                    {/* Status */}
                     <td>
-                      <span
-                        className="status-tag confirmed"
-                        style={{
-                          padding: "4px 10px",
-                          borderRadius: "12px",
-                          background: "#1b3a20",
-                          color: "#4caf50",
-                        }}
-                      >
+                      <span className="status-tag confirmed" style={{ padding: "4px 10px", borderRadius: "12px", background: "#1b3a20", color: "#4caf50" }}>
                         Confirmed
                       </span>
                     </td>

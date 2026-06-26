@@ -1474,7 +1474,7 @@
 
   .admin-actions {
     order: 3;
-    margin-left: auto; /* Tugmani o'ng tomonga suradi */
+    margin-left: auto;
   }
 
   .add-booking-btn {
